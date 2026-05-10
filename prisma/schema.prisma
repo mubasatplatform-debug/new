@@ -1,0 +1,224 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum VehicleStatus { AVAILABLE RESERVED RENTED MAINTENANCE CLEANING BLOCKED OVERDUE }
+enum BookingStatus { DRAFT PENDING_CUSTOMER_INFO PENDING_VERIFICATION PENDING_PAYMENT CONFIRMED CANCELLED EXPIRED CONVERTED_TO_CONTRACT }
+enum ContractStatus { DRAFT ACTIVE EXTENSION_REQUESTED OVERDUE RETURN_IN_PROGRESS CLOSED DISPUTED CANCELLED }
+enum PaymentStatus { PENDING PAID FAILED REFUNDED PARTIALLY_REFUNDED }
+enum DepositStatus { HELD RELEASED PARTIALLY_DEDUCTED REFUNDED }
+enum ConversationChannel { WHATSAPP WEB_CHAT APP_CHAT PHONE EMAIL }
+enum IntegrationStatus { CONNECTED NEEDS_SETUP ERROR DISABLED PLANNED }
+
+model User {
+  id             String   @id @default(uuid())
+  fullName       String
+  email          String?  @unique
+  phone          String   @unique
+  passwordHash   String?
+  nationalId     String?
+  licenseNumber  String?
+  licenseExpiry  DateTime?
+  birthDate      DateTime?
+  nationality    String?
+  roleId         String?
+  status         String   @default("ACTIVE")
+  loyaltyPoints  Int      @default(0)
+  loyaltyTier    String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  role           Role?    @relation(fields: [roleId], references: [id])
+  auditLogs      AuditLog[]
+}
+
+model Role {
+  id          String @id @default(uuid())
+  name        String @unique
+  scope       String @default("GLOBAL")
+  users       User[]
+  permissions RolePermission[]
+}
+
+model Permission {
+  id          String @id @default(uuid())
+  key         String @unique
+  description String?
+  roles       RolePermission[]
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id])
+  permission   Permission @relation(fields: [permissionId], references: [id])
+  @@id([roleId, permissionId])
+}
+
+model Branch {
+  id           String   @id @default(uuid())
+  nameAr       String
+  nameEn       String?
+  city         String
+  address      String
+  latitude     Decimal?
+  longitude    Decimal?
+  phone        String?
+  managerId    String?
+  workingHours Json?
+  status       String   @default("ACTIVE")
+  cars         Car[]
+}
+
+model CarCategory {
+  id          String @id @default(uuid())
+  nameAr      String
+  nameEn      String?
+  icon        String?
+  description String?
+  cars        Car[]
+}
+
+model Car {
+  id                  String        @id @default(uuid())
+  branchId            String
+  categoryId          String?
+  brand               String
+  model               String
+  year                Int
+  plateNumber         String        @unique
+  color               String?
+  transmission        String?
+  fuelType            String?
+  seats               Int?
+  luggageCapacity     Int?
+  dailyPrice          Decimal
+  weeklyPrice         Decimal
+  monthlyPrice        Decimal
+  longTermPrice       Decimal?
+  status              VehicleStatus @default(AVAILABLE)
+  mileage             Int           @default(0)
+  lastServiceDate     DateTime?
+  insuranceExpiry     DateTime?
+  registrationExpiry  DateTime?
+  inspectionExpiry    DateTime?
+  gpsDeviceId         String?
+  depreciationRate    Decimal?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  branch              Branch        @relation(fields: [branchId], references: [id])
+  category            CarCategory?  @relation(fields: [categoryId], references: [id])
+  images              CarImage[]
+  features            CarFeature[]
+  bookings            Booking[]
+  contracts           Contract[]
+  maintenanceRecords  MaintenanceRecord[]
+  violations          Violation[]
+}
+
+model CarImage { id String @id @default(uuid()) carId String imageUrl String isPrimary Boolean @default(false) sortOrder Int @default(0) car Car @relation(fields: [carId], references: [id]) }
+model CarFeature { id String @id @default(uuid()) carId String featureName String icon String? car Car @relation(fields: [carId], references: [id]) }
+
+model Customer {
+  id             String   @id @default(uuid())
+  userId         String?
+  fullName       String
+  phone          String   @unique
+  email          String?
+  nationalId     String?
+  licenseNumber  String?
+  loyaltyPoints  Int      @default(0)
+  loyaltyTier    String?
+  classification String   @default("REGULAR")
+  riskScore      Int      @default(0)
+  notes          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  bookings       Booking[]
+  invoices       Invoice[]
+  conversations  Conversation[]
+}
+
+model Booking {
+  id                      String        @id @default(uuid())
+  bookingNumber           String        @unique
+  customerId              String
+  carId                   String
+  pickupBranchId          String?
+  returnBranchId          String?
+  pickupLocation          Json?
+  returnLocation          Json?
+  pickupDatetime          DateTime
+  returnDatetime          DateTime
+  totalDays               Int
+  dailyRate               Decimal
+  subtotal                Decimal
+  additionalServicesTotal Decimal       @default(0)
+  vat                     Decimal       @default(0)
+  discount                Decimal       @default(0)
+  totalAmount             Decimal
+  depositAmount           Decimal       @default(0)
+  status                  BookingStatus @default(DRAFT)
+  paymentStatus           PaymentStatus @default(PENDING)
+  createdAt               DateTime      @default(now())
+  updatedAt               DateTime      @updatedAt
+  customer                Customer      @relation(fields: [customerId], references: [id])
+  car                     Car           @relation(fields: [carId], references: [id])
+  services                BookingService[]
+  payments                Payment[]
+  contract                Contract?
+  invoices                Invoice[]
+}
+
+model AdditionalService { id String @id @default(uuid()) nameAr String nameEn String? price Decimal icon String? status String @default("ACTIVE") bookings BookingService[] }
+model BookingService { id String @id @default(uuid()) bookingId String serviceId String quantity Int @default(1) price Decimal booking Booking @relation(fields: [bookingId], references: [id]) service AdditionalService @relation(fields: [serviceId], references: [id]) }
+
+model Contract {
+  id                 String         @id @default(uuid())
+  bookingId          String         @unique
+  carId              String
+  contractNumber     String         @unique
+  status             ContractStatus @default(DRAFT)
+  pdfUrl             String?
+  signedAt           DateTime?
+  signatureData      Json?
+  preInspectionData  Json?
+  postInspectionData Json?
+  startAt            DateTime?
+  endAt              DateTime?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  booking            Booking        @relation(fields: [bookingId], references: [id])
+  car                Car            @relation(fields: [carId], references: [id])
+  events             ContractEvent[]
+  inspectionImages   InspectionImage[]
+  deposits           Deposit[]
+}
+
+model ContractEvent { id String @id @default(uuid()) contractId String eventType String payload Json? createdBy String? createdAt DateTime @default(now()) contract Contract @relation(fields: [contractId], references: [id]) }
+model InspectionImage { id String @id @default(uuid()) contractId String type String imageUrl String aiDetectedDamages Json? manualNotes String? createdAt DateTime @default(now()) contract Contract @relation(fields: [contractId], references: [id]) }
+
+model Invoice { id String @id @default(uuid()) invoiceNumber String @unique customerId String bookingId String? contractId String? totalAmount Decimal vatAmount Decimal status String zatcaStatus String? qrCode String? pdfUrl String? issuedAt DateTime @default(now()) customer Customer @relation(fields: [customerId], references: [id]) booking Booking? @relation(fields: [bookingId], references: [id]) payments Payment[] }
+model Payment { id String @id @default(uuid()) bookingId String? invoiceId String? amount Decimal paymentMethod String transactionId String? gateway String? status PaymentStatus @default(PENDING) paidAt DateTime? refundedAt DateTime? booking Booking? @relation(fields: [bookingId], references: [id]) invoice Invoice? @relation(fields: [invoiceId], references: [id]) }
+model PaymentLink { id String @id @default(uuid()) customerId String? invoiceId String? amount Decimal url String status String expiresAt DateTime createdAt DateTime @default(now()) }
+model Deposit { id String @id @default(uuid()) contractId String amount Decimal status DepositStatus @default(HELD) heldAt DateTime? releasedAt DateTime? deductionAmount Decimal? notes String? contract Contract @relation(fields: [contractId], references: [id]) }
+
+model MaintenanceRecord { id String @id @default(uuid()) carId String type String description String? cost Decimal? performedBy String? vendorName String? serviceDate DateTime? nextServiceDate DateTime? status String @default("OPEN") car Car @relation(fields: [carId], references: [id]) }
+model Violation { id String @id @default(uuid()) carId String customerId String? bookingId String? contractId String? violationNumber String? type String amount Decimal violationDate DateTime status String najmReference String? car Car @relation(fields: [carId], references: [id]) }
+model Accident { id String @id @default(uuid()) bookingId String? contractId String? carId String customerId String? accidentDate DateTime location Json? description String? najmReportNumber String? severity String? damageAmount Decimal? insuranceClaimId String? status String }
+
+model Conversation { id String @id @default(uuid()) customerId String? channel ConversationChannel status String assignedTo String? aiHandled Boolean @default(false) startedAt DateTime @default(now()) endedAt DateTime? customer Customer? @relation(fields: [customerId], references: [id]) messages Message[] }
+model Message { id String @id @default(uuid()) conversationId String senderType String senderId String? content String attachments Json? aiGenerated Boolean @default(false) sentAt DateTime @default(now()) conversation Conversation @relation(fields: [conversationId], references: [id]) }
+
+model Promotion { id String @id @default(uuid()) code String @unique title String description String? discountType String discountValue Decimal minAmount Decimal? maxDiscount Decimal? validFrom DateTime validUntil DateTime usageLimit Int? usedCount Int @default(0) status String @default("ACTIVE") }
+model Review { id String @id @default(uuid()) customerId String carId String bookingId String rating Int comment String? sentimentScore Decimal? createdAt DateTime @default(now()) }
+model LoyaltyTransaction { id String @id @default(uuid()) customerId String type String points Int bookingId String? description String? createdAt DateTime @default(now()) }
+model Notification { id String @id @default(uuid()) userId String? type String channel String title String body String readAt DateTime? sentAt DateTime? }
+model AiSession { id String @id @default(uuid()) userId String? conversationId String? context Json? createdAt DateTime @default(now()) toolCalls AiToolCall[] }
+model AiToolCall { id String @id @default(uuid()) aiSessionId String toolName String input Json output Json? status String requiresConfirmation Boolean @default(false) confirmedBy String? createdAt DateTime @default(now()) session AiSession @relation(fields: [aiSessionId], references: [id]) }
+model IntegrationConnection { id String @id @default(uuid()) provider String status IntegrationStatus config Json? lastCheckedAt DateTime? }
+model AuditLog { id String @id @default(uuid()) userId String? action String model String? recordId String? oldValues Json? newValues Json? ipAddress String? userAgent String? createdAt DateTime @default(now()) user User? @relation(fields: [userId], references: [id]) }
