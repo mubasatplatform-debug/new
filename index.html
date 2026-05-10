@@ -1,343 +1,879 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مباس — لوحة تأجير السيارات</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ديل Plus Rent OS — النموذج الأولي</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar__logo">
-      <div class="logo-icon">م</div>
-      <span class="logo-text">مباس</span>
-    </div>
 
-    <nav class="sidebar__nav">
-      <a href="#" class="nav-item nav-item--active" data-page="dashboard">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        <span>الرئيسية</span>
-      </a>
-      <a href="#" class="nav-item" data-page="cars">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="9" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><path d="M13 3v5h5"/></svg>
-        <span>السيارات</span>
-      </a>
-      <a href="#" class="nav-item" data-page="bookings">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span>الحجوزات</span>
-        <span class="badge">3</span>
-      </a>
-      <a href="#" class="nav-item" data-page="customers">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <span>العملاء</span>
-      </a>
-      <a href="#" class="nav-item" data-page="analytics">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        <span>التقارير</span>
-      </a>
-      <a href="#" class="nav-item" data-page="settings">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-        <span>الإعدادات</span>
-      </a>
+<!-- ── Flow Navigation ────────────────────────────────────── -->
+<div class="flow-nav">
+  <button class="flow-btn active" onclick="showScreen('home')">🌐 الموقع</button>
+  <button class="flow-btn" onclick="showScreen('booking')">📋 الحجز</button>
+  <button class="flow-btn" onclick="showScreen('admin')">🛠️ الإدارة</button>
+  <button class="flow-btn" onclick="showScreen('customer')">👤 العميل</button>
+  <button class="flow-btn" onclick="showScreen('workflow')">🔄 الوركفلو</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 1 — MARKETING HOMEPAGE
+══════════════════════════════════════════════════════════ -->
+<div id="screen-home" class="screen active">
+  <header class="marketing-header">
+    <a href="#" class="logo">
+      <div class="logo-mark">د</div>
+      <div class="logo-text-wrap">
+        <span class="logo-name">ديل Plus</span>
+        <span class="logo-sub">Rent OS</span>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="#">أسطولنا</a>
+      <a href="#">الأسعار</a>
+      <a href="#">الفروع</a>
+      <a href="#">ليموزين</a>
+      <a href="#">الشركات</a>
+      <a href="#">تواصل معنا</a>
     </nav>
+    <div class="header-actions">
+      <button class="btn btn-secondary btn-sm" onclick="showScreen('customer')">حسابي</button>
+      <button class="btn btn-primary btn-sm" onclick="showScreen('booking')">احجز الآن</button>
+    </div>
+  </header>
 
-    <div class="sidebar__user">
-      <div class="user-avatar">م</div>
-      <div class="user-info">
-        <span class="user-name">مباس بلاتفورم</span>
-        <span class="user-role">مدير النظام</span>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>🇸🇦</span> الرياض • جدة • الدمام
+      </div>
+      <h1 class="hero-title">
+        تأجير السيارات<br/>
+        بتجربة <span>استثنائية</span>
+      </h1>
+      <p class="hero-subtitle">أسطول متميز من السيارات الفاخرة والعائلية بأسعار تنافسية. حجز فوري، تسليم لبابك، عقود رقمية.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-lg" onclick="showScreen('booking')">ابدأ الحجز الآن</button>
+        <button class="btn btn-secondary btn-lg">🎬 شاهد كيف يعمل</button>
       </div>
     </div>
-  </aside>
+    <div class="hero-visual">
+      <div class="hero-car-placeholder">
+        <span>🚗</span>
+        <div style="font-size:14px;margin-top:12px;color:rgba(255,255,255,.4)">صورة السيارة</div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Main -->
-  <main class="main">
-    <header class="topbar">
-      <div class="topbar__left">
-        <h1 class="page-title">لوحة التحكم</h1>
-        <p class="page-subtitle">أهلاً، هذا ملخص نشاط اليوم</p>
+  <!-- Booking Search Box -->
+  <div style="padding: 0 40px;">
+    <div class="booking-search-box">
+      <div class="search-field">
+        <label>نوع التأجير</label>
+        <select>
+          <option>يومي</option>
+          <option>أسبوعي</option>
+          <option>شهري</option>
+          <option>طويل الأمد</option>
+          <option>ليموزين</option>
+        </select>
       </div>
-      <div class="topbar__right">
-        <div class="search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="ابحث عن سيارة أو عميل..." />
-        </div>
-        <button class="btn-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span class="notification-dot"></span>
-        </button>
+      <div class="search-field">
+        <label>مدينة الاستلام</label>
+        <select>
+          <option>الرياض — العليا</option>
+          <option>جدة — حراء</option>
+          <option>الدمام</option>
+        </select>
       </div>
-    </header>
+      <div class="search-field">
+        <label>تاريخ الاستلام</label>
+        <input type="date" value="2026-05-12"/>
+      </div>
+      <div class="search-field">
+        <label>تاريخ الإرجاع</label>
+        <input type="date" value="2026-05-15"/>
+      </div>
+      <button class="btn btn-primary" onclick="showScreen('booking')" style="height:52px;align-self:end;">
+        🔍 ابحث
+      </button>
+    </div>
+  </div>
 
-    <!-- Stats -->
-    <section class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-card__icon stat-card__icon--blue">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="9" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
-        </div>
-        <div class="stat-card__body">
-          <span class="stat-label">إجمالي السيارات</span>
-          <span class="stat-value">48</span>
-          <span class="stat-change stat-change--up">+4 هذا الشهر</span>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__icon stat-card__icon--green">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
-        <div class="stat-card__body">
-          <span class="stat-label">مؤجّرة الآن</span>
-          <span class="stat-value">31</span>
-          <span class="stat-change stat-change--up">64% من الأسطول</span>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__icon stat-card__icon--orange">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div class="stat-card__body">
-          <span class="stat-label">متاحة للإيجار</span>
-          <span class="stat-value">13</span>
-          <span class="stat-change stat-change--down">-2 عن الأمس</span>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__icon stat-card__icon--purple">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </div>
-        <div class="stat-card__body">
-          <span class="stat-label">الإيرادات (مايو)</span>
-          <span class="stat-value">42,800 ر</span>
-          <span class="stat-change stat-change--up">+18% عن أبريل</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Chart + Bookings -->
-    <section class="content-grid">
-      <!-- Chart -->
-      <div class="card chart-card">
-        <div class="card__header">
-          <h2 class="card__title">الإيرادات الأسبوعية</h2>
-          <div class="chart-tabs">
-            <button class="chart-tab chart-tab--active">أسبوعي</button>
-            <button class="chart-tab">شهري</button>
-            <button class="chart-tab">سنوي</button>
+  <!-- Fleet Section -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">أسطولنا المتميز</div>
+      <h2 class="section-title">اختر سيارتك المثالية</h2>
+      <p class="section-subtitle">أكثر من 48 سيارة من أفخر الماركات العالمية جاهزة لك</p>
+    </div>
+    <div class="fleet-grid">
+      <div class="vehicle-card">
+        <div class="vehicle-img">🚗<div class="vehicle-badge">الأكثر طلباً</div></div>
+        <div class="vehicle-body">
+          <div class="vehicle-model">تويوتا كامري 2024</div>
+          <div class="vehicle-cat">سيدان فاخرة</div>
+          <div class="vehicle-specs">
+            <div class="spec">⚡ أوتوماتيك</div>
+            <div class="spec">❄️ 5 مقاعد</div>
+            <div class="spec">⛽ بنزين</div>
           </div>
-        </div>
-        <div class="chart-area">
-          <div class="chart-y-labels">
-            <span>20k</span>
-            <span>15k</span>
-            <span>10k</span>
-            <span>5k</span>
-            <span>0</span>
-          </div>
-          <div class="chart-bars">
-            <div class="bar-group">
-              <div class="bar" style="--h:55%"><span class="bar-tooltip">11k ر</span></div>
-              <span class="bar-label">الأحد</span>
-            </div>
-            <div class="bar-group">
-              <div class="bar" style="--h:72%"><span class="bar-tooltip">14.4k ر</span></div>
-              <span class="bar-label">الإثنين</span>
-            </div>
-            <div class="bar-group">
-              <div class="bar" style="--h:60%"><span class="bar-tooltip">12k ر</span></div>
-              <span class="bar-label">الثلاثاء</span>
-            </div>
-            <div class="bar-group">
-              <div class="bar bar--active" style="--h:90%"><span class="bar-tooltip">18k ر</span></div>
-              <span class="bar-label">الأربعاء</span>
-            </div>
-            <div class="bar-group">
-              <div class="bar" style="--h:80%"><span class="bar-tooltip">16k ر</span></div>
-              <span class="bar-label">الخميس</span>
-            </div>
-            <div class="bar-group">
-              <div class="bar" style="--h:95%"><span class="bar-tooltip">19k ر</span></div>
-              <span class="bar-label">الجمعة</span>
-            </div>
-            <div class="bar-group">
-              <div class="bar" style="--h:85%"><span class="bar-tooltip">17k ر</span></div>
-              <span class="bar-label">السبت</span>
-            </div>
+          <div class="vehicle-footer">
+            <div class="vehicle-price">300 ر <span>/ يوم</span></div>
+            <button class="btn btn-primary btn-sm" onclick="showScreen('booking')">احجز</button>
           </div>
         </div>
       </div>
-
-      <!-- Recent bookings -->
-      <div class="card activity-card">
-        <div class="card__header">
-          <h2 class="card__title">آخر الحجوزات</h2>
-          <a href="#" class="link-sm">عرض الكل</a>
+      <div class="vehicle-card">
+        <div class="vehicle-img">🚙</div>
+        <div class="vehicle-body">
+          <div class="vehicle-model">نيسان باترول 2024</div>
+          <div class="vehicle-cat">SUV فاخر — 7 مقاعد</div>
+          <div class="vehicle-specs">
+            <div class="spec">⚡ أوتوماتيك</div>
+            <div class="spec">❄️ 7 مقاعد</div>
+            <div class="spec">⛽ بنزين</div>
+          </div>
+          <div class="vehicle-footer">
+            <div class="vehicle-price">400 ر <span>/ يوم</span></div>
+            <button class="btn btn-primary btn-sm" onclick="showScreen('booking')">احجز</button>
+          </div>
         </div>
-        <ul class="activity-list">
-          <li class="activity-item">
-            <div class="activity-icon activity-icon--new">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="9" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
-            </div>
-            <div class="activity-body">
-              <span class="activity-user">محمد العمري</span>
-              <span class="activity-text">حجز تويوتا كامري — 3 أيام</span>
-              <span class="activity-time">منذ 10 دقائق</span>
-            </div>
-            <span class="booking-amount">+900 ر</span>
-          </li>
-          <li class="activity-item">
-            <div class="activity-icon activity-icon--return">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.47"/></svg>
-            </div>
-            <div class="activity-body">
-              <span class="activity-user">سارة القحطاني</span>
-              <span class="activity-text">إرجاع هيونداي سوناتا</span>
-              <span class="activity-time">منذ 45 دقيقة</span>
-            </div>
-            <span class="booking-amount done">مكتمل</span>
-          </li>
-          <li class="activity-item">
-            <div class="activity-icon activity-icon--new">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="9" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
-            </div>
-            <div class="activity-body">
-              <span class="activity-user">فهد الدوسري</span>
-              <span class="activity-text">حجز نيسان باترول — أسبوع</span>
-              <span class="activity-time">منذ ساعتين</span>
-            </div>
-            <span class="booking-amount">+2,100 ر</span>
-          </li>
-          <li class="activity-item">
-            <div class="activity-icon activity-icon--late">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            </div>
-            <div class="activity-body">
-              <span class="activity-user">خالد المطيري</span>
-              <span class="activity-text">تأخر في الإرجاع — 2 يوم</span>
-              <span class="activity-time">منذ 3 ساعات</span>
-            </div>
-            <span class="booking-amount late">+200 ر</span>
-          </li>
-          <li class="activity-item">
-            <div class="activity-icon activity-icon--new">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="9" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
-            </div>
-            <div class="activity-body">
-              <span class="activity-user">نورة الشمري</span>
-              <span class="activity-text">حجز كيا سبورتاج — يومان</span>
-              <span class="activity-time">منذ 5 ساعات</span>
-            </div>
-            <span class="booking-amount">+700 ر</span>
-          </li>
+      </div>
+      <div class="vehicle-card">
+        <div class="vehicle-img">🚘<div class="vehicle-badge" style="background:var(--purple);color:#fff">VIP</div></div>
+        <div class="vehicle-body">
+          <div class="vehicle-model">لاند كروزر VXR 2024</div>
+          <div class="vehicle-cat">SUV — فئة VIP</div>
+          <div class="vehicle-specs">
+            <div class="spec">⚡ أوتوماتيك</div>
+            <div class="spec">❄️ 7 مقاعد</div>
+            <div class="spec">⛽ بنزين</div>
+          </div>
+          <div class="vehicle-footer">
+            <div class="vehicle-price">600 ر <span>/ يوم</span></div>
+            <button class="btn btn-primary btn-sm" onclick="showScreen('booking')">احجز</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-strip">
+    <div class="stat-item"><div class="stat-number">48+</div><div class="stat-label">سيارة في الأسطول</div></div>
+    <div class="stat-item"><div class="stat-number">12k+</div><div class="stat-label">عميل راضٍ</div></div>
+    <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">مدن سعودية</div></div>
+    <div class="stat-item"><div class="stat-number">4.9 ★</div><div class="stat-label">تقييم العملاء</div></div>
+  </div>
+
+  <footer class="marketing-footer">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="logo">
+          <div class="logo-mark">د</div>
+          <div class="logo-text-wrap">
+            <span class="logo-name">ديل Plus</span>
+            <span class="logo-sub">Rent OS</span>
+          </div>
+        </a>
+        <p class="footer-desc">نظام تشغيل متكامل لتأجير السيارات والليموزين في المملكة العربية السعودية. جودة لا تُنافس.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">الخدمات</div>
+        <ul class="footer-links">
+          <li><a href="#">تأجير يومي</a></li>
+          <li><a href="#">تأجير شهري</a></li>
+          <li><a href="#">ليموزين</a></li>
+          <li><a href="#">تأجير شركات</a></li>
         </ul>
       </div>
-    </section>
-
-    <!-- Fleet table -->
-    <section class="card table-card">
-      <div class="card__header">
-        <h2 class="card__title">حالة الأسطول</h2>
-        <button class="btn btn--primary">+ إضافة سيارة</button>
+      <div>
+        <div class="footer-col-title">الشركة</div>
+        <ul class="footer-links">
+          <li><a href="#">عنّا</a></li>
+          <li><a href="#">الفروع</a></li>
+          <li><a href="#">الوظائف</a></li>
+          <li><a href="#">الشراكات</a></li>
+        </ul>
       </div>
-      <div class="table-wrapper">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>السيارة</th>
-              <th>اللوحة</th>
-              <th>الحالة</th>
-              <th>العميل الحالي</th>
-              <th>تاريخ الإرجاع</th>
-              <th>الإيراد (شهري)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="car-name">
-                  <div class="car-icon">🚗</div>
-                  <div>
-                    <div class="car-model">تويوتا كامري 2024</div>
-                    <div class="car-color">أبيض — 300 ر/يوم</div>
-                  </div>
-                </div>
-              </td>
-              <td class="plate-cell">أ ب ج 1234</td>
-              <td><span class="status-badge status-badge--rented">مؤجّرة</span></td>
-              <td class="customer-cell">محمد العمري</td>
-              <td class="date-cell">13 مايو 2026</td>
-              <td class="revenue-cell">8,400 ر</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="car-name">
-                  <div class="car-icon">🚙</div>
-                  <div>
-                    <div class="car-model">نيسان باترول 2023</div>
-                    <div class="car-color">أسود — 400 ر/يوم</div>
-                  </div>
-                </div>
-              </td>
-              <td class="plate-cell">د هـ و 5678</td>
-              <td><span class="status-badge status-badge--rented">مؤجّرة</span></td>
-              <td class="customer-cell">فهد الدوسري</td>
-              <td class="date-cell">17 مايو 2026</td>
-              <td class="revenue-cell">11,200 ر</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="car-name">
-                  <div class="car-icon">🚘</div>
-                  <div>
-                    <div class="car-model">كيا سبورتاج 2024</div>
-                    <div class="car-color">رمادي — 350 ر/يوم</div>
-                  </div>
-                </div>
-              </td>
-              <td class="plate-cell">ز ح ط 9012</td>
-              <td><span class="status-badge status-badge--available">متاحة</span></td>
-              <td class="customer-cell">—</td>
-              <td class="date-cell">—</td>
-              <td class="revenue-cell">6,300 ر</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="car-name">
-                  <div class="car-icon">🚗</div>
-                  <div>
-                    <div class="car-model">هيونداي سوناتا 2023</div>
-                    <div class="car-color">فضي — 280 ر/يوم</div>
-                  </div>
-                </div>
-              </td>
-              <td class="plate-cell">ي ك ل 3456</td>
-              <td><span class="status-badge status-badge--maintenance">صيانة</span></td>
-              <td class="customer-cell">—</td>
-              <td class="date-cell">جاهزة 15 مايو</td>
-              <td class="revenue-cell">5,600 ر</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="car-name">
-                  <div class="car-icon">🚙</div>
-                  <div>
-                    <div class="car-model">تويوتا لاند كروزر 2024</div>
-                    <div class="car-color">أبيض — 600 ر/يوم</div>
-                  </div>
-                </div>
-              </td>
-              <td class="plate-cell">م ن س 7890</td>
-              <td><span class="status-badge status-badge--rented">مؤجّرة</span></td>
-              <td class="customer-cell">سلطان الغامدي</td>
-              <td class="date-cell">20 مايو 2026</td>
-              <td class="revenue-cell">15,000 ر</td>
-            </tr>
-          </tbody>
-        </table>
+      <div>
+        <div class="footer-col-title">الدعم</div>
+        <ul class="footer-links">
+          <li><a href="#">مركز المساعدة</a></li>
+          <li><a href="#">واتساب</a></li>
+          <li><a href="#">الشروط</a></li>
+          <li><a href="#">الخصوصية</a></li>
+        </ul>
       </div>
-    </section>
-  </main>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ديل Plus Rent OS — جميع الحقوق محفوظة</span>
+      <span>🇸🇦 المملكة العربية السعودية</span>
+    </div>
+  </footer>
+</div>
 
-  <script src="app.js"></script>
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 2 — BOOKING FLOW
+══════════════════════════════════════════════════════════ -->
+<div id="screen-booking" class="screen">
+  <div class="booking-layout">
+    <div class="booking-header">
+      <a href="#" class="logo" onclick="showScreen('home');return false;">
+        <div class="logo-mark" style="background:var(--grad-orange);color:var(--purple-dark)">د</div>
+        <div class="logo-text-wrap">
+          <span class="logo-name" style="color:var(--ink)">ديل Plus</span>
+          <span class="logo-sub" style="color:var(--orange)">Rent OS</span>
+        </div>
+      </a>
+      <div class="booking-steps">
+        <div class="step done"><div class="step-num">✓</div> النوع والتاريخ</div>
+        <div class="step active"><div class="step-num">2</div> اختيار السيارة</div>
+        <div class="step"><div class="step-num">3</div> التأمين والإضافات</div>
+        <div class="step"><div class="step-num">4</div> بياناتك</div>
+        <div class="step"><div class="step-num">5</div> الدفع</div>
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="showScreen('home')">← رجوع</button>
+    </div>
+
+    <div class="booking-body">
+      <div class="booking-main">
+        <div class="booking-card">
+          <div class="booking-card-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="9" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
+            اختر سيارتك
+          </div>
+          <div class="car-select-grid">
+            <div class="car-option selected">
+              <div class="car-opt-img">🚗</div>
+              <div class="car-opt-name">تويوتا كامري 2024</div>
+              <div class="car-opt-cat">سيدان فاخرة • أبيض • أوتوماتيك</div>
+              <div style="display:flex;gap:12px;font-size:12px;color:var(--muted);margin-bottom:12px">
+                <span>⛽ بنزين</span><span>❄️ 5 مقاعد</span><span>📍 متاحة</span>
+              </div>
+              <div class="car-opt-price">300 ر <span style="font-size:13px;font-weight:400;color:var(--muted)">/ يوم</span></div>
+            </div>
+            <div class="car-option">
+              <div class="car-opt-img">🚙</div>
+              <div class="car-opt-name">كيا سبورتاج 2024</div>
+              <div class="car-opt-cat">SUV متوسط • رمادي • أوتوماتيك</div>
+              <div style="display:flex;gap:12px;font-size:12px;color:var(--muted);margin-bottom:12px">
+                <span>⛽ بنزين</span><span>❄️ 5 مقاعد</span><span>📍 متاحة</span>
+              </div>
+              <div class="car-opt-price">350 ر <span style="font-size:13px;font-weight:400;color:var(--muted)">/ يوم</span></div>
+            </div>
+            <div class="car-option">
+              <div class="car-opt-img">🚘</div>
+              <div class="car-opt-name">هيونداي أزيرا 2024</div>
+              <div class="car-opt-cat">سيدان • أسود • أوتوماتيك</div>
+              <div style="display:flex;gap:12px;font-size:12px;color:var(--muted);margin-bottom:12px">
+                <span>⛽ بنزين</span><span>❄️ 5 مقاعد</span><span>📍 متاحة</span>
+              </div>
+              <div class="car-opt-price">320 ر <span style="font-size:13px;font-weight:400;color:var(--muted)">/ يوم</span></div>
+            </div>
+            <div class="car-option">
+              <div class="car-opt-img">🚙</div>
+              <div class="car-opt-name">نيسان باترول 2024</div>
+              <div class="car-opt-cat">SUV كبير • أبيض • 7 مقاعد</div>
+              <div style="display:flex;gap:12px;font-size:12px;color:var(--muted);margin-bottom:12px">
+                <span>⛽ بنزين</span><span>❄️ 7 مقاعد</span><span>📍 متاحة</span>
+              </div>
+              <div class="car-opt-price">400 ر <span style="font-size:13px;font-weight:400;color:var(--muted)">/ يوم</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- OTP Step preview -->
+        <div class="booking-card" style="text-align:center;padding:48px">
+          <div style="font-size:52px;margin-bottom:16px">📱</div>
+          <h3 style="font-size:22px;font-weight:800;margin-bottom:8px">تحقق من رقمك</h3>
+          <p style="color:var(--muted);margin-bottom:32px">أرسلنا كود تحقق إلى <strong>+966 5x xxx xxxx</strong></p>
+          <div class="otp-inputs" style="direction:ltr">
+            <input class="otp-input" maxlength="1" value="4"/>
+            <input class="otp-input" maxlength="1" value="8"/>
+            <input class="otp-input" maxlength="1" value="3"/>
+            <input class="otp-input" maxlength="1" value=""/>
+            <input class="otp-input" maxlength="1" value=""/>
+          </div>
+          <p style="font-size:13px;color:var(--muted)">لم يصلك الكود؟ <a href="#" style="color:var(--purple);font-weight:600">أعد الإرسال</a></p>
+        </div>
+      </div>
+
+      <div class="booking-sidebar">
+        <div class="order-summary">
+          <div class="order-header">
+            <h3>ملخص الحجز</h3>
+          </div>
+          <div class="order-body">
+            <div style="display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--gray-100);margin-bottom:8px">
+              <div style="font-size:40px">🚗</div>
+              <div>
+                <div style="font-weight:700;font-size:15px">تويوتا كامري 2024</div>
+                <div style="font-size:12px;color:var(--muted)">سيدان فاخرة • أبيض</div>
+              </div>
+            </div>
+            <div class="order-row"><span class="order-label">مدة الإيجار</span><span class="order-value">3 أيام</span></div>
+            <div class="order-row"><span class="order-label">سعر اليوم</span><span class="order-value">300 ر</span></div>
+            <div class="order-row"><span class="order-label">التأمين الشامل</span><span class="order-value">150 ر</span></div>
+            <div class="order-row"><span class="order-label">التوصيل</span><span class="order-value">50 ر</span></div>
+            <div class="order-row"><span class="order-label">ضريبة القيمة</span><span class="order-value">113.5 ر</span></div>
+            <div class="order-row total"><span>الإجمالي</span><span>1,213.5 ر</span></div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px" onclick="showScreen('admin')">
+              متابعة للدفع →
+            </button>
+            <div style="text-align:center;margin-top:12px;font-size:12px;color:var(--muted)">
+              🔒 دفع آمن عبر مدى / فيزا / آبل باي
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 3 — ADMIN DASHBOARD
+══════════════════════════════════════════════════════════ -->
+<div id="screen-admin" class="screen">
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-logo">
+        <a href="#" class="logo" onclick="showScreen('home');return false;">
+          <div class="logo-mark">د</div>
+          <div class="logo-text-wrap">
+            <span class="logo-name">ديل Plus</span>
+            <span class="logo-sub">Admin</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="admin-nav-group">
+        <div class="admin-nav-label">الرئيسية</div>
+        <button class="admin-nav-item active">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          لوحة التحكم
+        </button>
+        <button class="admin-nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>
+          خريطة الأسطول الحية
+        </button>
+      </div>
+
+      <div class="admin-nav-group">
+        <div class="admin-nav-label">التشغيل</div>
+        <button class="admin-nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="9" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
+          الأسطول
+        </button>
+        <button class="admin-nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          الحجوزات
+          <span class="nav-badge">3</span>
+        </button>
+        <button class="admin-nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          العقود
+        </button>
+        <button class="admin-nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          العملاء
+        </button>
+      </div>
+
+      <div class="admin-nav-group">
+        <div class="admin-nav-label">المالية</div>
+        <button class="admin-nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          المالية والفواتير
+        </button>
+        <button class="admin-nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          التقارير
+        </button>
+      </div>
+
+      <div class="admin-nav-group">
+        <div class="admin-nav-label">الذكاء الاصطناعي</div>
+        <button class="admin-nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          AI Command Center
+        </button>
+        <button class="admin-nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          CRM / الوارد
+        </button>
+      </div>
+
+      <div class="admin-user">
+        <div class="admin-user-av">م</div>
+        <div>
+          <div class="admin-user-name">محمد المدير</div>
+          <div class="admin-user-role">مدير تنفيذي</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <div>
+          <div class="admin-page-title">لوحة التحكم</div>
+          <div class="admin-page-sub">الأحد، 10 مايو 2026</div>
+        </div>
+        <div class="admin-topbar-actions">
+          <div class="admin-search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--muted)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input placeholder="ابحث عن حجز أو عميل أو سيارة..."/>
+          </div>
+          <div class="icon-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="notif-dot"></span>
+          </div>
+          <button class="btn btn-primary btn-sm">+ حجز جديد</button>
+        </div>
+      </div>
+
+      <div class="admin-content">
+        <!-- KPIs -->
+        <div class="kpi-grid">
+          <div class="kpi-card kpi-card--purple">
+            <div class="kpi-icon kpi-icon--purple">🚗</div>
+            <div class="kpi-label">إجمالي الأسطول</div>
+            <div class="kpi-value">48</div>
+            <div class="kpi-change up">↑ +4 هذا الشهر</div>
+          </div>
+          <div class="kpi-card kpi-card--orange">
+            <div class="kpi-icon kpi-icon--orange">🔑</div>
+            <div class="kpi-label">مؤجّرة الآن</div>
+            <div class="kpi-value">31</div>
+            <div class="kpi-change up">↑ 64% إشغال</div>
+          </div>
+          <div class="kpi-card kpi-card--green">
+            <div class="kpi-icon kpi-icon--green">💰</div>
+            <div class="kpi-label">إيرادات مايو</div>
+            <div class="kpi-value">42.8k</div>
+            <div class="kpi-change up">↑ +18% عن أبريل</div>
+          </div>
+          <div class="kpi-card kpi-card--blue">
+            <div class="kpi-icon kpi-icon--blue">⏳</div>
+            <div class="kpi-label">حجوزات اليوم</div>
+            <div class="kpi-value">7</div>
+            <div class="kpi-change down">↓ 3 متأخرة</div>
+          </div>
+        </div>
+
+        <!-- Chart + Fleet Status -->
+        <div class="dash-grid">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div class="dash-card-title">الإيرادات الأسبوعية</div>
+              <div style="display:flex;gap:4px">
+                <button class="btn btn-ghost btn-sm" style="padding:5px 12px;font-size:12px;background:rgba(91,44,145,.08);color:var(--purple);border-color:transparent">أسبوعي</button>
+                <button class="btn btn-ghost btn-sm" style="padding:5px 12px;font-size:12px">شهري</button>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <div class="chart-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>إيرادات</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div>حجوزات جديدة</div>
+              </div>
+              <div class="chart-bars-wrap">
+                <div class="chart-bar-col">
+                  <div class="bar-stack">
+                    <div class="bar-seg" style="height:30%;background:rgba(245,166,35,.5);border-radius:4px"></div>
+                    <div class="bar-seg" style="height:25%;background:var(--purple);border-radius:4px 4px 0 0"></div>
+                  </div>
+                  <div class="bar-x">أحد</div>
+                </div>
+                <div class="chart-bar-col">
+                  <div class="bar-stack">
+                    <div class="bar-seg" style="height:40%;background:rgba(245,166,35,.5);border-radius:4px"></div>
+                    <div class="bar-seg" style="height:32%;background:var(--purple);border-radius:4px 4px 0 0"></div>
+                  </div>
+                  <div class="bar-x">إثنين</div>
+                </div>
+                <div class="chart-bar-col">
+                  <div class="bar-stack">
+                    <div class="bar-seg" style="height:20%;background:rgba(245,166,35,.5);border-radius:4px"></div>
+                    <div class="bar-seg" style="height:28%;background:var(--purple);border-radius:4px 4px 0 0"></div>
+                  </div>
+                  <div class="bar-x">ثلاثاء</div>
+                </div>
+                <div class="chart-bar-col">
+                  <div class="bar-stack">
+                    <div class="bar-seg" style="height:45%;background:rgba(245,166,35,.5);border-radius:4px"></div>
+                    <div class="bar-seg" style="height:45%;background:var(--purple);border-radius:4px 4px 0 0"></div>
+                  </div>
+                  <div class="bar-x">أربعاء</div>
+                </div>
+                <div class="chart-bar-col">
+                  <div class="bar-stack">
+                    <div class="bar-seg" style="height:35%;background:rgba(245,166,35,.5);border-radius:4px"></div>
+                    <div class="bar-seg" style="height:38%;background:var(--purple);border-radius:4px 4px 0 0"></div>
+                  </div>
+                  <div class="bar-x">خميس</div>
+                </div>
+                <div class="chart-bar-col">
+                  <div class="bar-stack">
+                    <div class="bar-seg" style="height:55%;background:rgba(245,166,35,.5);border-radius:4px"></div>
+                    <div class="bar-seg" style="height:40%;background:var(--purple);border-radius:4px 4px 0 0"></div>
+                  </div>
+                  <div class="bar-x">جمعة</div>
+                </div>
+                <div class="chart-bar-col">
+                  <div class="bar-stack">
+                    <div class="bar-seg" style="height:50%;background:rgba(245,166,35,.5);border-radius:4px"></div>
+                    <div class="bar-seg" style="height:35%;background:var(--purple);border-radius:4px 4px 0 0"></div>
+                  </div>
+                  <div class="bar-x">سبت</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div class="dash-card-title">حالة الأسطول</div>
+            </div>
+            <div style="padding:24px">
+              <div class="fleet-donut">
+                <div class="fleet-donut-label">
+                  <div class="num">48</div>
+                  <div class="lbl">سيارة</div>
+                </div>
+              </div>
+              <ul class="fleet-legend">
+                <li><div style="display:flex;align-items:center;gap:8px"><div class="dot" style="background:var(--purple)"></div>مؤجّرة</div><strong>31</strong></li>
+                <li><div style="display:flex;align-items:center;gap:8px"><div class="dot" style="background:var(--orange)"></div>متاحة</div><strong>13</strong></li>
+                <li><div style="display:flex;align-items:center;gap:8px"><div class="dot" style="background:var(--warning)"></div>صيانة</div><strong>3</strong></li>
+                <li><div style="display:flex;align-items:center;gap:8px"><div class="dot" style="background:var(--gray-200)"></div>محجوبة</div><strong>1</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Map -->
+        <div class="dash-card" style="margin-bottom:24px">
+          <div class="dash-card-header">
+            <div class="dash-card-title">🗺️ خريطة الأسطول الحية</div>
+            <a href="#" class="view-all">فتح الخريطة الكاملة</a>
+          </div>
+          <div class="map-panel" style="border-radius:0">
+            <div class="map-grid"></div>
+            <div class="map-pins">
+              <div class="map-pin"><div class="pin-dot purple"><span>🚗</span></div><div class="pin-label">كامري<br/>مؤجّرة</div></div>
+              <div class="map-pin"><div class="pin-dot orange"><span>🚙</span></div><div class="pin-label">باترول<br/>متاحة</div></div>
+              <div class="map-pin"><div class="pin-dot purple"><span>🚘</span></div><div class="pin-label">لاندكروزر<br/>مؤجّرة</div></div>
+              <div class="map-pin"><div class="pin-dot danger"><span>⚠️</span></div><div class="pin-label">سوناتا<br/>صيانة</div></div>
+              <div class="map-pin"><div class="pin-dot purple"><span>🚗</span></div><div class="pin-label">أزيرا<br/>مؤجّرة</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Bookings Table -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div class="dash-card-title">آخر الحجوزات</div>
+            <a href="#" class="view-all">عرض الكل</a>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>رقم الحجز</th>
+                  <th>العميل</th>
+                  <th>السيارة</th>
+                  <th>الفترة</th>
+                  <th>الحالة</th>
+                  <th>المبلغ</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="booking-id">DP-2026-0891</span></td>
+                  <td><div class="customer-cell"><div class="cust-av">م</div><div><div class="cust-name">محمد العمري</div><div class="cust-phone">+966 55 123 4567</div></div></div></td>
+                  <td><div class="car-cell"><span class="car-emoji">🚗</span>كامري 2024</div></td>
+                  <td style="font-size:13px;color:var(--muted)">12–15 مايو</td>
+                  <td><span class="status-pill active">نشط</span></td>
+                  <td style="font-weight:700;color:var(--purple)">1,213 ر</td>
+                  <td><button class="btn btn-ghost btn-sm">عرض</button></td>
+                </tr>
+                <tr>
+                  <td><span class="booking-id">DP-2026-0890</span></td>
+                  <td><div class="customer-cell"><div class="cust-av">ف</div><div><div class="cust-name">فهد الدوسري</div><div class="cust-phone">+966 50 987 6543</div></div></div></td>
+                  <td><div class="car-cell"><span class="car-emoji">🚙</span>باترول 2024</div></td>
+                  <td style="font-size:13px;color:var(--muted)">10–17 مايو</td>
+                  <td><span class="status-pill active">نشط</span></td>
+                  <td style="font-weight:700;color:var(--purple)">2,800 ر</td>
+                  <td><button class="btn btn-ghost btn-sm">عرض</button></td>
+                </tr>
+                <tr>
+                  <td><span class="booking-id">DP-2026-0889</span></td>
+                  <td><div class="customer-cell"><div class="cust-av">خ</div><div><div class="cust-name">خالد المطيري</div><div class="cust-phone">+966 54 456 7890</div></div></div></td>
+                  <td><div class="car-cell"><span class="car-emoji">🚘</span>سبورتاج 2024</div></td>
+                  <td style="font-size:13px;color:var(--danger)">كان 8 مايو ⚠️</td>
+                  <td><span class="status-pill overdue">متأخر</span></td>
+                  <td style="font-weight:700;color:var(--danger)">1,050 ر</td>
+                  <td><button class="btn btn-ghost btn-sm" style="border-color:var(--danger);color:var(--danger)">تحصيل</button></td>
+                </tr>
+                <tr>
+                  <td><span class="booking-id">DP-2026-0888</span></td>
+                  <td><div class="customer-cell"><div class="cust-av">ن</div><div><div class="cust-name">نورة الشمري</div><div class="cust-phone">+966 56 321 0987</div></div></div></td>
+                  <td><div class="car-cell"><span class="car-emoji">🚗</span>كامري 2024</div></td>
+                  <td style="font-size:13px;color:var(--muted)">5–7 مايو</td>
+                  <td><span class="status-pill done">مكتمل</span></td>
+                  <td style="font-weight:700;color:var(--muted)">750 ر</td>
+                  <td><button class="btn btn-ghost btn-sm">عرض</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 4 — CUSTOMER PORTAL
+══════════════════════════════════════════════════════════ -->
+<div id="screen-customer" class="screen">
+  <div class="customer-layout">
+    <div class="customer-header">
+      <a href="#" class="logo" onclick="showScreen('home');return false;">
+        <div class="logo-mark">د</div>
+        <div class="logo-text-wrap">
+          <span class="logo-name">ديل Plus</span>
+          <span class="logo-sub">Rent OS</span>
+        </div>
+      </a>
+      <div class="customer-nav">
+        <button class="cust-nav-btn active">الرئيسية</button>
+        <button class="cust-nav-btn">حجوزاتي</button>
+        <button class="cust-nav-btn">عقودي</button>
+        <button class="cust-nav-btn">المحفظة</button>
+        <button class="cust-nav-btn">الدعم</button>
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="showScreen('home')">← الموقع</button>
+    </div>
+
+    <div class="customer-body">
+      <div class="customer-welcome">
+        <div class="welcome-text">
+          <h2>أهلاً محمد 👋</h2>
+          <p>لديك حجز نشط حتى 15 مايو 2026</p>
+        </div>
+        <div class="active-booking-card">
+          <div class="ab-label">🔑 حجزك الحالي</div>
+          <div class="ab-car">🚗 تويوتا كامري 2024</div>
+          <div class="ab-date">ينتهي: 15 مايو 2026 • 3 أيام متبقية</div>
+          <div class="ab-bar"><div class="ab-fill" style="width:40%"></div></div>
+        </div>
+      </div>
+
+      <div class="customer-grid">
+        <div class="cust-card">
+          <div class="cust-card-head">
+            <div class="cust-card-title">سجل الحجوزات</div>
+            <a href="#" class="view-all">الكل</a>
+          </div>
+          <div class="booking-history-item">
+            <div class="bh-icon">🚗</div>
+            <div class="bh-body">
+              <div class="bh-car">تويوتا كامري 2024</div>
+              <div class="bh-date">12–15 مايو 2026 • نشط</div>
+            </div>
+            <div><span class="status-pill active">نشط</span></div>
+            <div class="bh-amount">1,213 ر</div>
+          </div>
+          <div class="booking-history-item">
+            <div class="bh-icon">🚙</div>
+            <div class="bh-body">
+              <div class="bh-car">كيا سبورتاج 2024</div>
+              <div class="bh-date">1–3 مايو 2026 • مكتمل</div>
+            </div>
+            <div><span class="status-pill done">مكتمل</span></div>
+            <div class="bh-amount">700 ر</div>
+          </div>
+          <div class="booking-history-item">
+            <div class="bh-icon">🚘</div>
+            <div class="bh-body">
+              <div class="bh-car">هيونداي أزيرا 2024</div>
+              <div class="bh-date">20–25 أبريل 2026 • مكتمل</div>
+            </div>
+            <div><span class="status-pill done">مكتمل</span></div>
+            <div class="bh-amount">1,600 ر</div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="wallet-card">
+            <div class="wallet-label">💳 رصيد المحفظة</div>
+            <div class="wallet-amount">250 <span>ر</span></div>
+            <div style="margin-top:16px;display:flex;gap:8px">
+              <button class="btn btn-primary btn-sm">إيداع</button>
+              <button class="btn btn-secondary btn-sm">كشف</button>
+            </div>
+          </div>
+          <div class="cust-card" style="padding:24px">
+            <div style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px">⭐ نقاط الولاء</div>
+            <div style="font-size:32px;font-weight:900;color:var(--orange)">1,240</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:4px">نقطة = 15 يوماً مجانياً</div>
+            <div style="margin-top:16px;height:8px;background:var(--gray-100);border-radius:var(--r-pill);overflow:hidden">
+              <div style="height:100%;width:62%;background:var(--grad-orange);border-radius:var(--r-pill)"></div>
+            </div>
+            <div style="font-size:12px;color:var(--muted);margin-top:8px">1,240 / 2,000 للمستوى الذهبي</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 5 — WORKFLOW DIAGRAM
+══════════════════════════════════════════════════════════ -->
+<div id="screen-workflow" class="screen">
+  <div class="marketing-header">
+    <a href="#" class="logo" onclick="showScreen('home');return false;">
+      <div class="logo-mark">د</div>
+      <div class="logo-text-wrap">
+        <span class="logo-name">ديل Plus</span>
+        <span class="logo-sub">Rent OS</span>
+      </div>
+    </a>
+    <span style="color:rgba(255,255,255,.6);font-size:14px">خريطة الوركفلو والشاشات</span>
+    <button class="btn btn-secondary btn-sm" onclick="showScreen('home')">← الموقع</button>
+  </div>
+
+  <div class="workflow-screen">
+    <h1 class="workflow-title">وركفلو Dheel Plus Rent OS</h1>
+    <p class="workflow-sub">رحلة العميل الكاملة من البحث حتى إغلاق العقد</p>
+
+    <!-- Booking Flow -->
+    <div class="workflow-section">
+      <div class="workflow-section-title">1. مسار الحجز — Booking Flow</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-icon">🌐</div><div class="flow-step-label">الموقع / البحث</div></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-step"><div class="flow-step-icon">🚗</div><div class="flow-step-label">اختيار السيارة</div></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-step highlight"><div class="flow-step-icon">👤</div><div class="flow-step-label">بيانات العميل</div></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-step"><div class="flow-step-icon">📱</div><div class="flow-step-label">OTP تحقق</div></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-step"><div class="flow-step-icon">🪪</div><div class="flow-step-label">رفع الهوية OCR</div></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-step"><div class="flow-step-icon">💳</div><div class="flow-step-label">الدفع</div></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-step highlight"><div class="flow-step-icon">✅</div><div class="flow-step-label">تأكيد الحجز</div></div>
+      </div>
+    </div>
+
+    <!-- Contract Lifecycle -->
+    <div class="workflow-section">
+      <div class="workflow-section-title">2. دورة العقد — Contract Lifecycle</div>
+      <div class="lifecycle-grid">
+        <div class="lifecycle-card">
+          <div class="lifecycle-step-num">1</div>
+          <div class="lifecycle-title">تأكيد الحجز</div>
+          <div class="lifecycle-desc">تعيين السيارة، إنشاء العقد المسودة، إشعار العميل</div>
+          <div class="lifecycle-badge">Draft → Confirmed</div>
+        </div>
+        <div class="lifecycle-card">
+          <div class="lifecycle-step-num">2</div>
+          <div class="lifecycle-title">تسليم السيارة</div>
+          <div class="lifecycle-desc">Checklist التسليم، صور الفحص، توقيع رقمي، تفعيل العقد</div>
+          <div class="lifecycle-badge">Handover → Active</div>
+        </div>
+        <div class="lifecycle-card">
+          <div class="lifecycle-step-num">3</div>
+          <div class="lifecycle-title">أثناء الإيجار</div>
+          <div class="lifecycle-desc">تتبع GPS، تمديد العقد، تحصيل رسوم التأخير، CRM</div>
+          <div class="lifecycle-badge">Active / Overdue</div>
+        </div>
+        <div class="lifecycle-card">
+          <div class="lifecycle-step-num">4</div>
+          <div class="lifecycle-title">استلام السيارة</div>
+          <div class="lifecycle-desc">فحص الإرجاع، صور، تسوية الوديعة، إغلاق العقد، ZATCA</div>
+          <div class="lifecycle-badge">Return → Closed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vehicle Statuses -->
+    <div class="workflow-section">
+      <div class="workflow-section-title">3. حالات السيارة — Vehicle Statuses</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <span class="status-pill available" style="font-size:13px;padding:8px 16px">متاحة AVAILABLE</span>
+        <span class="status-pill rented" style="font-size:13px;padding:8px 16px">محجوزة RESERVED</span>
+        <span class="status-pill active" style="font-size:13px;padding:8px 16px">مؤجّرة RENTED</span>
+        <span class="status-pill maintenance" style="font-size:13px;padding:8px 16px">صيانة MAINTENANCE</span>
+        <span class="status-pill pending" style="font-size:13px;padding:8px 16px">تنظيف CLEANING</span>
+        <span class="status-pill overdue" style="font-size:13px;padding:8px 16px">متأخرة OVERDUE</span>
+        <span class="status-pill done" style="font-size:13px;padding:8px 16px">محجوبة BLOCKED</span>
+      </div>
+    </div>
+
+    <!-- Modules Map -->
+    <div class="workflow-section">
+      <div class="workflow-section-title">4. خريطة الموديولات — 24 Module</div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px">
+        <div class="lifecycle-card" style="text-align:center;padding:16px">
+          <div style="font-size:24px;margin-bottom:8px">🔐</div>
+          <div style="font-size:12px;font-weight:700">Auth & RBAC</div>
+        </div>
+        <div class="lifecycle-card" style="text-align:center;padding:16px">
+          <div style="font-size:24px;margin-bottom:8px">🚗</div>
+          <div style="font-size:12px;font-weight:700">Fleet</div>
+        </div>
+        <div class="lifecycle-card" style="text-align:center;padding:16px">
+          <div style="font-size:24px;margin-bottom:8px">📋</div>
+          <div style="font-size:12px;font-weight:700">Bookings</div>
+        </div>
+        <div class="lifecycle-card" style="text-align:center;padding:16px">
+          <div style="font-size:24px;margin-bottom:8px">📄</div>
+          <div style="font-size:12px;font-weight:700">Contracts</div>
+        </div>
+        <div class="lifecycle-card" style="text-align:center;padding:16px">
+          <div style="font-size:24px;margin-bottom:8px">💳</div>
+          <div style="font-size:12px;font-weight:700">Payments</div>
+        </div>
+        <div class="lifecycle-card" style="text-align:center;padding:16px">
+          <div style="font-size:24px;margin-bottom:8px">🧾</div>
+          <div style="font-size:12px;font-weight:700">Invoices/ZATCA</div>
+        </div>
+        <div class="lifecycle-card" style="text-align:center;padding:16px">
+          <div style="font-size:24px;margin-bottom:8px">🗺️</div>
+          <div style="font-size:12px;font-weight:700">Maps/GPS</div>
+        </div>
+        <div class="lifecycle-card" style="text-align:center;padding:16px">
+          <div style="font-size:24px;margin-bottom:8px">💬</div>
+          <div style="font-size:12px;font-weight:700">CRM/WhatsApp</div>
+        </div>
+        <div class="lifecycle-card" style="text-align:center;padding:16px">
+          <div style="font-size:24px;margin-bottom:8px">🤖</div>
+          <div style="font-size:12px;font-weight:700">AI Gateway</div>
+        </div>
+        <div class="lifecycle-card" style="text-align:center;padding:16px">
+          <div style="font-size:24px;margin-bottom:8px">🔧</div>
+          <div style="font-size:12px;font-weight:700">Maintenance</div>
+        </div>
+        <div class="lifecycle-card" style="text-align:center;padding:16px">
+          <div style="font-size:24px;margin-bottom:8px">⭐</div>
+          <div style="font-size:12px;font-weight:700">Loyalty</div>
+        </div>
+        <div class="lifecycle-card" style="text-align:center;padding:16px">
+          <div style="font-size:24px;margin-bottom:8px">🔍</div>
+          <div style="font-size:12px;font-weight:700">Audit Logs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
