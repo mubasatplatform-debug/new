@@ -1,68 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mubas Platform — Dashboard</title>
+  <title>مباس — لوحة تأجير السيارات</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar__logo">
-      <div class="logo-icon">M</div>
-      <span class="logo-text">Mubas</span>
+      <div class="logo-icon">م</div>
+      <span class="logo-text">مباس</span>
     </div>
 
     <nav class="sidebar__nav">
-      <a href="#" class="nav-item nav-item--active">
+      <a href="#" class="nav-item nav-item--active" data-page="dashboard">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        <span>Dashboard</span>
+        <span>الرئيسية</span>
       </a>
-      <a href="#" class="nav-item">
+      <a href="#" class="nav-item" data-page="cars">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="9" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><path d="M13 3v5h5"/></svg>
+        <span>السيارات</span>
+      </a>
+      <a href="#" class="nav-item" data-page="bookings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>الحجوزات</span>
+        <span class="badge">3</span>
+      </a>
+      <a href="#" class="nav-item" data-page="customers">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <span>Users</span>
+        <span>العملاء</span>
       </a>
-      <a href="#" class="nav-item">
+      <a href="#" class="nav-item" data-page="analytics">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        <span>Analytics</span>
+        <span>التقارير</span>
       </a>
-      <a href="#" class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <span>Projects</span>
-      </a>
-      <a href="#" class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <span>Messages</span>
-        <span class="badge">5</span>
-      </a>
-      <a href="#" class="nav-item">
+      <a href="#" class="nav-item" data-page="settings">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-        <span>Settings</span>
+        <span>الإعدادات</span>
       </a>
     </nav>
 
     <div class="sidebar__user">
-      <div class="user-avatar">MP</div>
+      <div class="user-avatar">م</div>
       <div class="user-info">
-        <span class="user-name">Mubas Platform</span>
-        <span class="user-role">Admin</span>
+        <span class="user-name">مباس بلاتفورم</span>
+        <span class="user-role">مدير النظام</span>
       </div>
     </div>
   </aside>
 
-  <!-- Main content -->
+  <!-- Main -->
   <main class="main">
-    <!-- Header -->
     <header class="topbar">
       <div class="topbar__left">
-        <h1 class="page-title">Dashboard</h1>
-        <p class="page-subtitle">Welcome back, Mubas</p>
+        <h1 class="page-title">لوحة التحكم</h1>
+        <p class="page-subtitle">أهلاً، هذا ملخص نشاط اليوم</p>
       </div>
       <div class="topbar__right">
         <div class="search-box">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="Search..." />
+          <input type="text" placeholder="ابحث عن سيارة أو عميل..." />
         </div>
         <button class="btn-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
@@ -75,243 +74,263 @@
     <section class="stats-grid">
       <div class="stat-card">
         <div class="stat-card__icon stat-card__icon--blue">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="9" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
         </div>
         <div class="stat-card__body">
-          <span class="stat-label">Total Users</span>
-          <span class="stat-value">24,521</span>
-          <span class="stat-change stat-change--up">+12.5% this month</span>
+          <span class="stat-label">إجمالي السيارات</span>
+          <span class="stat-value">48</span>
+          <span class="stat-change stat-change--up">+4 هذا الشهر</span>
         </div>
       </div>
       <div class="stat-card">
         <div class="stat-card__icon stat-card__icon--green">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
         <div class="stat-card__body">
-          <span class="stat-label">Revenue</span>
-          <span class="stat-value">$84,320</span>
-          <span class="stat-change stat-change--up">+8.2% this month</span>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__icon stat-card__icon--purple">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        </div>
-        <div class="stat-card__body">
-          <span class="stat-label">Projects</span>
-          <span class="stat-value">142</span>
-          <span class="stat-change stat-change--up">+3 new this week</span>
+          <span class="stat-label">مؤجّرة الآن</span>
+          <span class="stat-value">31</span>
+          <span class="stat-change stat-change--up">64% من الأسطول</span>
         </div>
       </div>
       <div class="stat-card">
         <div class="stat-card__icon stat-card__icon--orange">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <div class="stat-card__body">
-          <span class="stat-label">Activity</span>
-          <span class="stat-value">98.7%</span>
-          <span class="stat-change stat-change--down">-0.3% today</span>
+          <span class="stat-label">متاحة للإيجار</span>
+          <span class="stat-value">13</span>
+          <span class="stat-change stat-change--down">-2 عن الأمس</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--purple">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="stat-card__body">
+          <span class="stat-label">الإيرادات (مايو)</span>
+          <span class="stat-value">42,800 ر</span>
+          <span class="stat-change stat-change--up">+18% عن أبريل</span>
         </div>
       </div>
     </section>
 
-    <!-- Chart + Activity -->
+    <!-- Chart + Bookings -->
     <section class="content-grid">
       <!-- Chart -->
       <div class="card chart-card">
         <div class="card__header">
-          <h2 class="card__title">Revenue Overview</h2>
+          <h2 class="card__title">الإيرادات الأسبوعية</h2>
           <div class="chart-tabs">
-            <button class="chart-tab chart-tab--active">Weekly</button>
-            <button class="chart-tab">Monthly</button>
-            <button class="chart-tab">Yearly</button>
+            <button class="chart-tab chart-tab--active">أسبوعي</button>
+            <button class="chart-tab">شهري</button>
+            <button class="chart-tab">سنوي</button>
           </div>
         </div>
         <div class="chart-area">
+          <div class="chart-y-labels">
+            <span>20k</span>
+            <span>15k</span>
+            <span>10k</span>
+            <span>5k</span>
+            <span>0</span>
+          </div>
           <div class="chart-bars">
             <div class="bar-group">
-              <div class="bar" style="--h: 60%"><span class="bar-tooltip">$12k</span></div>
-              <span class="bar-label">Mon</span>
+              <div class="bar" style="--h:55%"><span class="bar-tooltip">11k ر</span></div>
+              <span class="bar-label">الأحد</span>
             </div>
             <div class="bar-group">
-              <div class="bar" style="--h: 80%"><span class="bar-tooltip">$16k</span></div>
-              <span class="bar-label">Tue</span>
+              <div class="bar" style="--h:72%"><span class="bar-tooltip">14.4k ر</span></div>
+              <span class="bar-label">الإثنين</span>
             </div>
             <div class="bar-group">
-              <div class="bar" style="--h: 55%"><span class="bar-tooltip">$11k</span></div>
-              <span class="bar-label">Wed</span>
+              <div class="bar" style="--h:60%"><span class="bar-tooltip">12k ر</span></div>
+              <span class="bar-label">الثلاثاء</span>
             </div>
             <div class="bar-group">
-              <div class="bar bar--active" style="--h: 95%"><span class="bar-tooltip">$19k</span></div>
-              <span class="bar-label">Thu</span>
+              <div class="bar bar--active" style="--h:90%"><span class="bar-tooltip">18k ر</span></div>
+              <span class="bar-label">الأربعاء</span>
             </div>
             <div class="bar-group">
-              <div class="bar" style="--h: 70%"><span class="bar-tooltip">$14k</span></div>
-              <span class="bar-label">Fri</span>
+              <div class="bar" style="--h:80%"><span class="bar-tooltip">16k ر</span></div>
+              <span class="bar-label">الخميس</span>
             </div>
             <div class="bar-group">
-              <div class="bar" style="--h: 45%"><span class="bar-tooltip">$9k</span></div>
-              <span class="bar-label">Sat</span>
+              <div class="bar" style="--h:95%"><span class="bar-tooltip">19k ر</span></div>
+              <span class="bar-label">الجمعة</span>
             </div>
             <div class="bar-group">
-              <div class="bar" style="--h: 35%"><span class="bar-tooltip">$7k</span></div>
-              <span class="bar-label">Sun</span>
+              <div class="bar" style="--h:85%"><span class="bar-tooltip">17k ر</span></div>
+              <span class="bar-label">السبت</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Recent activity -->
+      <!-- Recent bookings -->
       <div class="card activity-card">
         <div class="card__header">
-          <h2 class="card__title">Recent Activity</h2>
-          <a href="#" class="link-sm">View all</a>
+          <h2 class="card__title">آخر الحجوزات</h2>
+          <a href="#" class="link-sm">عرض الكل</a>
         </div>
         <ul class="activity-list">
           <li class="activity-item">
-            <div class="activity-avatar" style="background:#6366f1">AJ</div>
-            <div class="activity-body">
-              <span class="activity-user">Alex Johnson</span>
-              <span class="activity-text">created a new project</span>
-              <span class="activity-time">2 min ago</span>
+            <div class="activity-icon activity-icon--new">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="9" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
             </div>
+            <div class="activity-body">
+              <span class="activity-user">محمد العمري</span>
+              <span class="activity-text">حجز تويوتا كامري — 3 أيام</span>
+              <span class="activity-time">منذ 10 دقائق</span>
+            </div>
+            <span class="booking-amount">+900 ر</span>
           </li>
           <li class="activity-item">
-            <div class="activity-avatar" style="background:#10b981">SM</div>
-            <div class="activity-body">
-              <span class="activity-user">Sara Miller</span>
-              <span class="activity-text">submitted a report</span>
-              <span class="activity-time">18 min ago</span>
+            <div class="activity-icon activity-icon--return">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.47"/></svg>
             </div>
+            <div class="activity-body">
+              <span class="activity-user">سارة القحطاني</span>
+              <span class="activity-text">إرجاع هيونداي سوناتا</span>
+              <span class="activity-time">منذ 45 دقيقة</span>
+            </div>
+            <span class="booking-amount done">مكتمل</span>
           </li>
           <li class="activity-item">
-            <div class="activity-avatar" style="background:#f59e0b">TK</div>
-            <div class="activity-body">
-              <span class="activity-user">Tom Kim</span>
-              <span class="activity-text">updated user permissions</span>
-              <span class="activity-time">1 hr ago</span>
+            <div class="activity-icon activity-icon--new">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="9" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
             </div>
+            <div class="activity-body">
+              <span class="activity-user">فهد الدوسري</span>
+              <span class="activity-text">حجز نيسان باترول — أسبوع</span>
+              <span class="activity-time">منذ ساعتين</span>
+            </div>
+            <span class="booking-amount">+2,100 ر</span>
           </li>
           <li class="activity-item">
-            <div class="activity-avatar" style="background:#ef4444">RL</div>
-            <div class="activity-body">
-              <span class="activity-user">Rita Lee</span>
-              <span class="activity-text">deployed version 2.4.0</span>
-              <span class="activity-time">3 hr ago</span>
+            <div class="activity-icon activity-icon--late">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             </div>
+            <div class="activity-body">
+              <span class="activity-user">خالد المطيري</span>
+              <span class="activity-text">تأخر في الإرجاع — 2 يوم</span>
+              <span class="activity-time">منذ 3 ساعات</span>
+            </div>
+            <span class="booking-amount late">+200 ر</span>
           </li>
           <li class="activity-item">
-            <div class="activity-avatar" style="background:#8b5cf6">DM</div>
-            <div class="activity-body">
-              <span class="activity-user">Dan Moore</span>
-              <span class="activity-text">merged pull request #48</span>
-              <span class="activity-time">5 hr ago</span>
+            <div class="activity-icon activity-icon--new">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-3"/><circle cx="9" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
             </div>
+            <div class="activity-body">
+              <span class="activity-user">نورة الشمري</span>
+              <span class="activity-text">حجز كيا سبورتاج — يومان</span>
+              <span class="activity-time">منذ 5 ساعات</span>
+            </div>
+            <span class="booking-amount">+700 ر</span>
           </li>
         </ul>
       </div>
     </section>
 
-    <!-- Projects table -->
+    <!-- Fleet table -->
     <section class="card table-card">
       <div class="card__header">
-        <h2 class="card__title">Recent Projects</h2>
-        <button class="btn btn--primary">+ New Project</button>
+        <h2 class="card__title">حالة الأسطول</h2>
+        <button class="btn btn--primary">+ إضافة سيارة</button>
       </div>
       <div class="table-wrapper">
         <table class="data-table">
           <thead>
             <tr>
-              <th>Project</th>
-              <th>Status</th>
-              <th>Progress</th>
-              <th>Team</th>
-              <th>Due Date</th>
+              <th>السيارة</th>
+              <th>اللوحة</th>
+              <th>الحالة</th>
+              <th>العميل الحالي</th>
+              <th>تاريخ الإرجاع</th>
+              <th>الإيراد (شهري)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <div class="project-name">
-                  <div class="project-dot" style="background:#6366f1"></div>
-                  Platform Redesign
+                <div class="car-name">
+                  <div class="car-icon">🚗</div>
+                  <div>
+                    <div class="car-model">تويوتا كامري 2024</div>
+                    <div class="car-color">أبيض — 300 ر/يوم</div>
+                  </div>
                 </div>
               </td>
-              <td><span class="status-badge status-badge--active">Active</span></td>
-              <td>
-                <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
-                <span class="progress-text">72%</span>
-              </td>
-              <td>
-                <div class="team-avatars">
-                  <div class="team-avatar" style="background:#6366f1">A</div>
-                  <div class="team-avatar" style="background:#10b981">S</div>
-                  <div class="team-avatar" style="background:#f59e0b">T</div>
-                </div>
-              </td>
-              <td class="date-cell">Jun 30, 2026</td>
+              <td class="plate-cell">أ ب ج 1234</td>
+              <td><span class="status-badge status-badge--rented">مؤجّرة</span></td>
+              <td class="customer-cell">محمد العمري</td>
+              <td class="date-cell">13 مايو 2026</td>
+              <td class="revenue-cell">8,400 ر</td>
             </tr>
             <tr>
               <td>
-                <div class="project-name">
-                  <div class="project-dot" style="background:#10b981"></div>
-                  API Integration
+                <div class="car-name">
+                  <div class="car-icon">🚙</div>
+                  <div>
+                    <div class="car-model">نيسان باترول 2023</div>
+                    <div class="car-color">أسود — 400 ر/يوم</div>
+                  </div>
                 </div>
               </td>
-              <td><span class="status-badge status-badge--review">Review</span></td>
-              <td>
-                <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
-                <span class="progress-text">90%</span>
-              </td>
-              <td>
-                <div class="team-avatars">
-                  <div class="team-avatar" style="background:#ef4444">R</div>
-                  <div class="team-avatar" style="background:#8b5cf6">D</div>
-                </div>
-              </td>
-              <td class="date-cell">May 15, 2026</td>
+              <td class="plate-cell">د هـ و 5678</td>
+              <td><span class="status-badge status-badge--rented">مؤجّرة</span></td>
+              <td class="customer-cell">فهد الدوسري</td>
+              <td class="date-cell">17 مايو 2026</td>
+              <td class="revenue-cell">11,200 ر</td>
             </tr>
             <tr>
               <td>
-                <div class="project-name">
-                  <div class="project-dot" style="background:#f59e0b"></div>
-                  Mobile App v3
+                <div class="car-name">
+                  <div class="car-icon">🚘</div>
+                  <div>
+                    <div class="car-model">كيا سبورتاج 2024</div>
+                    <div class="car-color">رمادي — 350 ر/يوم</div>
+                  </div>
                 </div>
               </td>
-              <td><span class="status-badge status-badge--pending">Pending</span></td>
-              <td>
-                <div class="progress-bar"><div class="progress-fill" style="width:35%"></div></div>
-                <span class="progress-text">35%</span>
-              </td>
-              <td>
-                <div class="team-avatars">
-                  <div class="team-avatar" style="background:#6366f1">A</div>
-                  <div class="team-avatar" style="background:#f59e0b">T</div>
-                  <div class="team-avatar" style="background:#10b981">S</div>
-                  <div class="team-avatar team-avatar--more">+2</div>
-                </div>
-              </td>
-              <td class="date-cell">Aug 1, 2026</td>
+              <td class="plate-cell">ز ح ط 9012</td>
+              <td><span class="status-badge status-badge--available">متاحة</span></td>
+              <td class="customer-cell">—</td>
+              <td class="date-cell">—</td>
+              <td class="revenue-cell">6,300 ر</td>
             </tr>
             <tr>
               <td>
-                <div class="project-name">
-                  <div class="project-dot" style="background:#ef4444"></div>
-                  Security Audit
+                <div class="car-name">
+                  <div class="car-icon">🚗</div>
+                  <div>
+                    <div class="car-model">هيونداي سوناتا 2023</div>
+                    <div class="car-color">فضي — 280 ر/يوم</div>
+                  </div>
                 </div>
               </td>
-              <td><span class="status-badge status-badge--done">Done</span></td>
+              <td class="plate-cell">ي ك ل 3456</td>
+              <td><span class="status-badge status-badge--maintenance">صيانة</span></td>
+              <td class="customer-cell">—</td>
+              <td class="date-cell">جاهزة 15 مايو</td>
+              <td class="revenue-cell">5,600 ر</td>
+            </tr>
+            <tr>
               <td>
-                <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
-                <span class="progress-text">100%</span>
-              </td>
-              <td>
-                <div class="team-avatars">
-                  <div class="team-avatar" style="background:#8b5cf6">D</div>
-                  <div class="team-avatar" style="background:#ef4444">R</div>
+                <div class="car-name">
+                  <div class="car-icon">🚙</div>
+                  <div>
+                    <div class="car-model">تويوتا لاند كروزر 2024</div>
+                    <div class="car-color">أبيض — 600 ر/يوم</div>
+                  </div>
                 </div>
               </td>
-              <td class="date-cell">Apr 22, 2026</td>
+              <td class="plate-cell">م ن س 7890</td>
+              <td><span class="status-badge status-badge--rented">مؤجّرة</span></td>
+              <td class="customer-cell">سلطان الغامدي</td>
+              <td class="date-cell">20 مايو 2026</td>
+              <td class="revenue-cell">15,000 ر</td>
             </tr>
           </tbody>
         </table>
