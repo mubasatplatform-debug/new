@@ -1,0 +1,4 @@
+import { AdminShell } from '../../../components/AdminShell';
+import { PageMapTable } from '../../../components/PageShell';
+import { pageMap } from '../../../lib/page-map';
+export default function PageMapPage() { return <AdminShell title="ترتيب الصفحات الموجودة"><div className="grid grid-4"><div className="card stat"><span className="muted">إجمالي مسارات الويب آب</span><b>{pageMap.length}</b><span className="badge green">موجودة</span></div><div className="card stat"><span className="muted">سجل الواجهات الكامل</span><b>396</b><span className="badge purple">Screen Registry</span></div><div className="card stat"><span className="muted">خرائط Google</span><b>2</b><span className="badge orange">Public + Admin</span></div><div className="card stat"><span className="muted">المسار الرئيسي</span><b>MVP+</b><span className="badge green">جاهز للتطوير</span></div></div><PageMapTable/></AdminShell> }
