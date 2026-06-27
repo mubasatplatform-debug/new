@@ -1,5 +1,4 @@
-import { AuthCard } from 'better-auth-ui'
-import { authClient } from '@/lib/auth-client'
+import { AuthView } from 'better-auth-ui'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
@@ -16,15 +15,7 @@ export default function ForgotPasswordPage() {
           </p>
         </div>
 
-        <AuthCard
-          authClient={authClient}
-          view="forget-password"
-          localization={{
-            email: 'البريد الإلكتروني',
-            sendResetLink: 'إرسال رابط الاستعادة',
-            backToSignIn: 'العودة لتسجيل الدخول',
-          }}
-        />
+        <AuthView view="FORGOT_PASSWORD" />
 
         <p className="text-center text-sm text-muted-foreground mt-4">
           <Link href="/auth/sign-in" className="text-primary font-medium hover:underline">

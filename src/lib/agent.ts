@@ -253,6 +253,20 @@ async function executeTool(name: string, input: Record<string, unknown>): Promis
   }
 }
 
+// ─── Type-safe content conversion for the agentic loop ──────────────────────
+
+// Converts API response content to message params for the next API call.
+// Handles text and tool_use blocks; skips server-side or web-search blocks.
+function toAssistantContent(blocks: Anthropic.ContentBlock[]): Anthropic.ContentBlockParam[] {
+  return blocks.flatMap((b): Anthropic.ContentBlockParam[] => {
+    if (b.type === 'text') return [{ type: 'text', text: b.text }]
+    if (b.type === 'tool_use') return [{ type: 'tool_use', id: b.id, name: b.name, input: b.input }]
+    if (b.type === 'thinking') return [{ type: 'thinking', thinking: b.thinking, signature: b.signature }]
+    if (b.type === 'redacted_thinking') return [{ type: 'redacted_thinking', data: b.data }]
+    return []
+  })
+}
+
 // ─── Conversation history (Redis, 24h TTL, last 10 turns) ────────────────────
 
 type HistoryEntry = { role: 'user' | 'assistant'; content: string }
@@ -290,7 +304,6 @@ export async function runWhatsAppAgent(customerPhone: string, incomingText: stri
   let response = await anthropic.messages.create({
     model: 'claude-opus-4-8',
     max_tokens: 2048,
-    thinking: { type: 'adaptive' },
     system: SYSTEM_PROMPT,
     tools: TOOLS,
     messages,
@@ -313,17 +326,12 @@ export async function runWhatsAppAgent(customerPhone: string, incomingText: stri
       }),
     )
 
-    // Pass full assistant content (including thinking blocks) back to maintain context
-    messages.push({
-      role: 'assistant',
-      content: response.content as Anthropic.ContentBlockParam[],
-    })
+    messages.push({ role: 'assistant', content: toAssistantContent(response.content) })
     messages.push({ role: 'user', content: toolResults })
 
     response = await anthropic.messages.create({
       model: 'claude-opus-4-8',
       max_tokens: 2048,
-      thinking: { type: 'adaptive' },
       system: SYSTEM_PROMPT,
       tools: TOOLS,
       messages,
