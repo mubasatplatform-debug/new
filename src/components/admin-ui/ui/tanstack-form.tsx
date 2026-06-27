@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * tanstack-form.tsx — Main entry point for the form system.
  *

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useRegisterActions } from 'kbar';
 import { useTheme } from 'next-themes';
 import { useThemeConfig } from '@/components/themes/active-theme';

@@ -27,6 +27,13 @@ export const authRatelimit = new Ratelimit({
   prefix: 'rl:auth',
 })
 
+// 10 WhatsApp messages per hour per customer phone (agent rate limit)
+export const whatsappAgentRatelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(10, '3600 s'),
+  prefix: 'rl:wa-agent',
+})
+
 export async function checkIdempotency(key: string): Promise<boolean> {
   const exists = await redis.exists(`idempotent:${key}`)
   return exists === 1

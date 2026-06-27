@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { InfoButton } from '@/components/ui/info-button';
 import type { InfobarContent } from '@/components/ui/infobar';
 

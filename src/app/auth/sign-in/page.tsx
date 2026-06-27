@@ -1,5 +1,4 @@
-import { AuthCard } from '@better-auth/ui'
-import { authClient } from '@/lib/auth-client'
+import { AuthView } from 'better-auth-ui'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
@@ -14,21 +13,7 @@ export default function SignInPage() {
           <p className="text-muted-foreground mt-1">سجّل دخولك للمتابعة</p>
         </div>
 
-        <AuthCard
-          authClient={authClient}
-          view="sign-in"
-          redirectTo="/"
-          socialProviders={['google']}
-          localization={{
-            email: 'البريد الإلكتروني',
-            password: 'كلمة المرور',
-            signIn: 'تسجيل الدخول',
-            signInWith: 'الدخول بـ',
-            forgotPassword: 'نسيت كلمة المرور؟',
-            dontHaveAccount: 'ليس لديك حساب؟',
-            signUp: 'إنشاء حساب',
-          }}
-        />
+        <AuthView view="SIGN_IN" redirectTo="/" />
 
         <p className="text-center text-sm text-muted-foreground mt-4">
           ليس لديك حساب؟{' '}
