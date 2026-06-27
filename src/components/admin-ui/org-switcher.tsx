@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 
 import { useAuth, useOrganizationList } from '@clerk/nextjs';

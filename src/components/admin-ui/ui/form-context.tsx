@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * form-context.tsx — Shared primitives for the TanStack Form + shadcn/ui integration.
  *

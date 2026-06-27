@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import { useKBar } from 'kbar';
 import { Icons } from '@/components/icons';

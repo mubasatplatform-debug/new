@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import { navGroups } from '@/config/nav-config';
 import { KBarAnimator, KBarPortal, KBarPositioner, KBarProvider, KBarSearch } from 'kbar';

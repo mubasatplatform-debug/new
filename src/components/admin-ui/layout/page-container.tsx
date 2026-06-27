@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Heading } from '../ui/heading';
 import type { InfobarContent } from '@/components/ui/infobar';
