@@ -4,6 +4,7 @@ import { db } from '@/lib/db'
 import { checkIdempotency, setIdempotency } from '@/lib/redis'
 import { getSecret } from '@/lib/vault'
 import { sendEsimDeliveryEmail } from '@/lib/email'
+import { isWhatsAppConfigured, sendEsimDeliveryWhatsApp } from '@/lib/whatsapp'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '')
 
@@ -109,6 +110,21 @@ export async function POST(request: NextRequest) {
         activationCode,
         qrPayload,
       })
+
+      // WhatsApp notification (best-effort — must not break delivery)
+      if (isWhatsAppConfigured() && payment.order.user.phone) {
+        try {
+          await sendEsimDeliveryWhatsApp({
+            to: payment.order.user.phone,
+            name: payment.order.user.name,
+            orderId: payment.orderId,
+            activationCode,
+          })
+        } catch (whatsappError) {
+          const msg = whatsappError instanceof Error ? whatsappError.message : 'unknown'
+          console.error('[STRIPE WEBHOOK] WhatsApp notify failed:', msg)
+        }
+      }
 
       await tx.deliveryEvent.create({
         data: { orderId: payment.orderId, status: 'DELIVERED', message: 'Email sent' },

@@ -58,6 +58,7 @@ Zod (validation) + Upstash Redis (rate limit)
 Supabase Vault (encryption)
 Moyasar + Stripe
 Resend + React Email
+Infobip WhatsApp (REST API + MCP)
 Aramex REST API + OTO API
 Vercel (deployment)
 ```
@@ -97,6 +98,7 @@ src/
 │   ├── redis.ts          ← Upstash (rate limit + idempotency)
 │   ├── vault.ts          ← Supabase Vault (encryption)
 │   ├── email.ts          ← Resend
+│   ├── whatsapp.ts       ← إشعارات WhatsApp (Infobip)
 │   ├── shipping.ts       ← Aramex + OTO
 │   └── wallet.ts         ← محفظة داخلية
 ├── middleware.ts          ← Auth + Rate limit + Admin guard

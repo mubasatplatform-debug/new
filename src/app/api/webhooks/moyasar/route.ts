@@ -4,6 +4,7 @@ import { db } from '@/lib/db'
 import { checkIdempotency, setIdempotency } from '@/lib/redis'
 import { getSecret } from '@/lib/vault'
 import { sendEsimDeliveryEmail } from '@/lib/email'
+import { isWhatsAppConfigured, sendEsimDeliveryWhatsApp } from '@/lib/whatsapp'
 import { moyasarWebhookSchema } from '@/lib/validations'
 
 function verifyMoyasarSignature(payload: string, signature: string): boolean {
@@ -144,6 +145,21 @@ export async function POST(request: NextRequest) {
         activationCode,
         qrPayload,
       })
+
+      // 11b. WhatsApp notification (best-effort — must not break delivery)
+      if (isWhatsAppConfigured() && payment.order.user.phone) {
+        try {
+          await sendEsimDeliveryWhatsApp({
+            to: payment.order.user.phone,
+            name: payment.order.user.name,
+            orderId: payment.orderId,
+            activationCode,
+          })
+        } catch (whatsappError) {
+          const msg = whatsappError instanceof Error ? whatsappError.message : 'unknown'
+          console.error('[MOYASAR WEBHOOK] WhatsApp notify failed:', msg)
+        }
+      }
 
       // 12. Final delivery log
       await tx.deliveryEvent.create({
