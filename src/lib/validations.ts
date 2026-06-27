@@ -45,6 +45,35 @@ export const supportTicketSchema = z.object({
   priority: z.enum(['LOW', 'MEDIUM', 'HIGH']).default('MEDIUM'),
 })
 
+// Infobip inbound WhatsApp message webhook
+export const infobipInboundSchema = z.object({
+  results: z.array(
+    z.object({
+      from: z.string(),
+      to: z.string(),
+      messageId: z.string(),
+      integrationType: z.string().optional(),
+      receivedAt: z.string().optional(),
+      message: z.object({
+        type: z.string(),
+        text: z.string().optional(),
+      }),
+      contact: z
+        .object({
+          name: z
+            .object({
+              formattedName: z.string().optional(),
+              firstName: z.string().optional(),
+            })
+            .optional(),
+        })
+        .optional(),
+    }),
+  ),
+  messageCount: z.number().optional(),
+  pendingMessageCount: z.number().optional(),
+})
+
 export const packageSchema = z.object({
   name: z.string().min(2).max(100),
   nameAr: z.string().min(2).max(100),

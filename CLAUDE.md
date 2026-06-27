@@ -59,6 +59,7 @@ Supabase Vault (encryption)
 Moyasar + Stripe
 Resend + React Email
 Infobip WhatsApp (REST API + MCP)
+Anthropic Claude (وكيل خدمة العملاء عبر WhatsApp)
 Aramex REST API + OTO API
 Vercel (deployment)
 ```
@@ -89,7 +90,7 @@ src/
 │   ├── admin/            ← لوحة التحكم
 │   └── api/
 │       ├── auth/         ← better-auth
-│       ├── webhooks/     ← Moyasar + Stripe
+│       ├── webhooks/     ← Moyasar + Stripe + Infobip (inbound WhatsApp)
 │       ├── shipping/     ← Aramex + OTO
 │       └── wallet/       ← محفظة
 ├── lib/
@@ -99,6 +100,7 @@ src/
 │   ├── vault.ts          ← Supabase Vault (encryption)
 │   ├── email.ts          ← Resend
 │   ├── whatsapp.ts       ← إشعارات WhatsApp (Infobip)
+│   ├── agent.ts          ← وكيل AI لخدمة العملاء (Claude + tool use)
 │   ├── shipping.ts       ← Aramex + OTO
 │   └── wallet.ts         ← محفظة داخلية
 ├── middleware.ts          ← Auth + Rate limit + Admin guard
