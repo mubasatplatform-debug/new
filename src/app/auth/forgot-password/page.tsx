@@ -1,4 +1,4 @@
-import { AuthCard } from '@better-auth/ui'
+import { AuthCard } from 'better-auth-ui'
 import { authClient } from '@/lib/auth-client'
 import Link from 'next/link'
 import type { Metadata } from 'next'
